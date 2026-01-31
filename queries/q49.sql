@@ -12,13 +12,13 @@ FROM (
       SELECT
         ws_item_sk AS item,
         CAST(SUM(COALESCE(wr_return_quantity, 0)) AS FLOAT64) / CAST(SUM(COALESCE(ws_quantity, 0)) AS FLOAT64) AS return_ratio,
-        CAST(SUM(COALESCE(wr_return_amt, 0)) AS FLOAT64) / CAST(SUM(COALESCE(ws_net_paid, 0)) AS FLOAT64) AS currency_ratio
+        CAST(SUM(COALESCE(wr_return_amt, 0.00)) AS FLOAT64) / CAST(SUM(COALESCE(ws_net_paid, 0.00)) AS FLOAT64) AS currency_ratio
       FROM web_sales
       LEFT JOIN web_returns ON ws_order_number = wr_order_number AND ws_item_sk = wr_item_sk
       JOIN date_dim ON ws_sold_date_sk = d_date_sk
-      WHERE wr_return_amt > 10000
-        AND ws_net_profit > 1
-        AND ws_net_paid > 0
+      WHERE wr_return_amt > 10000.00
+        AND ws_net_profit > 1.00
+        AND ws_net_paid > 0.00
         AND ws_quantity > 0
         AND d_year = 2001 AND d_moy = 12
       GROUP BY ws_item_sk
@@ -37,13 +37,13 @@ FROM (
       SELECT
         cs_item_sk AS item,
         CAST(SUM(COALESCE(cr_return_quantity, 0)) AS FLOAT64) / CAST(SUM(COALESCE(cs_quantity, 0)) AS FLOAT64) AS return_ratio,
-        CAST(SUM(COALESCE(cr_return_amount, 0)) AS FLOAT64) / CAST(SUM(COALESCE(cs_net_paid, 0)) AS FLOAT64) AS currency_ratio
+        CAST(SUM(COALESCE(cr_return_amount, 0.00)) AS FLOAT64) / CAST(SUM(COALESCE(cs_net_paid, 0.00)) AS FLOAT64) AS currency_ratio
       FROM catalog_sales
       LEFT JOIN catalog_returns ON cs_order_number = cr_order_number AND cs_item_sk = cr_item_sk
       JOIN date_dim ON cs_sold_date_sk = d_date_sk
-      WHERE cr_return_amount > 10000
-        AND cs_net_profit > 1
-        AND cs_net_paid > 0
+      WHERE cr_return_amount > 10000.00
+        AND cs_net_profit > 1.00
+        AND cs_net_paid > 0.00
         AND cs_quantity > 0
         AND d_year = 2001 AND d_moy = 12
       GROUP BY cs_item_sk
@@ -62,13 +62,13 @@ FROM (
       SELECT
         ssr.ss_item_sk AS item,
         CAST(SUM(COALESCE(sr_return_quantity, 0)) AS FLOAT64) / CAST(SUM(COALESCE(ss_quantity, 0)) AS FLOAT64) AS return_ratio,
-        CAST(SUM(COALESCE(sr_return_amt, 0)) AS FLOAT64) / CAST(SUM(COALESCE(ss_net_paid, 0)) AS FLOAT64) AS currency_ratio
+        CAST(SUM(COALESCE(sr_return_amt, 0.00)) AS FLOAT64) / CAST(SUM(COALESCE(ss_net_paid, 0.00)) AS FLOAT64) AS currency_ratio
       FROM store_sales ssr
       LEFT JOIN store_returns ON ss_ticket_number = sr_ticket_number AND ss_item_sk = sr_item_sk
       JOIN date_dim ON ss_sold_date_sk = d_date_sk
-      WHERE sr_return_amt > 10000
-        AND ss_net_profit > 1
-        AND ss_net_paid > 0
+      WHERE sr_return_amt > 10000.00
+        AND ss_net_profit > 1.00
+        AND ss_net_paid > 0.00
         AND ss_quantity > 0
         AND d_year = 2001 AND d_moy = 12
       GROUP BY ssr.ss_item_sk

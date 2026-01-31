@@ -29,11 +29,11 @@ WHERE d_year = 2000
      AND ws_sales_price BETWEEN 150.00 AND 200.00)
   )
   AND (
-    (ca_country = 'United States' AND ca_state IN ('IN', 'OH', 'NJ') AND ws_net_profit BETWEEN 100 AND 200)
+    (ca_country = 'United States' AND ca_state IN ('IN', 'OH', 'NJ') AND ws_net_profit BETWEEN 100.00 AND 200.00)
     OR
-    (ca_country = 'United States' AND ca_state IN ('WI', 'CT', 'KY') AND ws_net_profit BETWEEN 150 AND 300)
+    (ca_country = 'United States' AND ca_state IN ('WI', 'CT', 'KY') AND ws_net_profit BETWEEN 150.00 AND 300.00)
     OR
-    (ca_country = 'United States' AND ca_state IN ('LA', 'IA', 'AR') AND ws_net_profit BETWEEN 50 AND 250)
+    (ca_country = 'United States' AND ca_state IN ('LA', 'IA', 'AR') AND ws_net_profit BETWEEN 50.00 AND 250.00)
   )
 GROUP BY r_reason_desc
 ORDER BY reason, avg_qty, avg_refund, avg_fee

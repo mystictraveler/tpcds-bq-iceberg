@@ -8,7 +8,7 @@ WITH ss AS (
     SELECT i_item_id FROM item WHERE i_color IN ('slate', 'blanched', 'burnished')
   )
   AND d_year = 2001 AND d_moy = 2
-  AND ca_gmt_offset = -5
+  AND ca_gmt_offset = -5.00
   GROUP BY i_item_id
 ),
 cs AS (
@@ -21,7 +21,7 @@ cs AS (
     SELECT i_item_id FROM item WHERE i_color IN ('slate', 'blanched', 'burnished')
   )
   AND d_year = 2001 AND d_moy = 2
-  AND ca_gmt_offset = -5
+  AND ca_gmt_offset = -5.00
   GROUP BY i_item_id
 ),
 ws AS (
@@ -34,7 +34,7 @@ ws AS (
     SELECT i_item_id FROM item WHERE i_color IN ('slate', 'blanched', 'burnished')
   )
   AND d_year = 2001 AND d_moy = 2
-  AND ca_gmt_offset = -5
+  AND ca_gmt_offset = -5.00
   GROUP BY i_item_id
 )
 SELECT i_item_id, SUM(total_sales) AS total_sales

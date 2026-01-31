@@ -11,10 +11,10 @@ FROM (
   JOIN customer ON ss_customer_sk = c_customer_sk
   JOIN customer_address ON c_current_addr_sk = ca_address_sk
   JOIN item ON ss_item_sk = i_item_sk
-  WHERE ca_gmt_offset = -5
+  WHERE ca_gmt_offset = -5.00
     AND i_category = 'Jewelry'
     AND (p_channel_dmail = 'Y' OR p_channel_email = 'Y' OR p_channel_tv = 'Y')
-    AND s_gmt_offset = -5
+    AND s_gmt_offset = -5.00
     AND d_year = 1998 AND d_moy = 11
 ) promotional_sales
 CROSS JOIN (
@@ -25,9 +25,9 @@ CROSS JOIN (
   JOIN customer ON ss_customer_sk = c_customer_sk
   JOIN customer_address ON c_current_addr_sk = ca_address_sk
   JOIN item ON ss_item_sk = i_item_sk
-  WHERE ca_gmt_offset = -5
+  WHERE ca_gmt_offset = -5.00
     AND i_category = 'Jewelry'
-    AND s_gmt_offset = -5
+    AND s_gmt_offset = -5.00
     AND d_year = 1998 AND d_moy = 11
 ) all_sales
 ORDER BY promotions, total

@@ -16,6 +16,6 @@ WHERE d_year = 1998 AND d_moy = 11
     OR (cd_marital_status = 'W' AND cd_education_status = 'Advanced Degree')
   )
   AND hd_buy_potential LIKE 'Unknown%'
-  AND ca_gmt_offset = -7
+  AND ca_gmt_offset = -7.00
 GROUP BY cc_call_center_id, cc_name, cc_manager, cd_marital_status, cd_education_status
 ORDER BY returns_loss DESC

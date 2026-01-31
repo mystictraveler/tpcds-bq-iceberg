@@ -8,7 +8,7 @@ WITH ss AS (
     SELECT i_manufact_id FROM item WHERE i_category IN ('Electronics')
   )
   AND d_year = 1998 AND d_moy = 5
-  AND ca_gmt_offset = -5
+  AND ca_gmt_offset = -5.00
   GROUP BY i_manufact_id
 ),
 cs AS (
@@ -21,7 +21,7 @@ cs AS (
     SELECT i_manufact_id FROM item WHERE i_category IN ('Electronics')
   )
   AND d_year = 1998 AND d_moy = 5
-  AND ca_gmt_offset = -5
+  AND ca_gmt_offset = -5.00
   GROUP BY i_manufact_id
 ),
 ws AS (
@@ -34,7 +34,7 @@ ws AS (
     SELECT i_manufact_id FROM item WHERE i_category IN ('Electronics')
   )
   AND d_year = 1998 AND d_moy = 5
-  AND ca_gmt_offset = -5
+  AND ca_gmt_offset = -5.00
   GROUP BY i_manufact_id
 )
 SELECT i_manufact_id, SUM(total_sales) AS total_sales

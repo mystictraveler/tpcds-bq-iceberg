@@ -10,7 +10,7 @@ SELECT
 FROM date_dim
 JOIN store_sales ON d_date_sk = ss_sold_date_sk
 JOIN store ON s_store_sk = ss_store_sk
-WHERE s_gmt_offset = -5
+WHERE s_gmt_offset = -5.00
   AND d_year = 2000
 GROUP BY s_store_name, s_store_id
 ORDER BY s_store_name, s_store_id, sun_sales, mon_sales, tue_sales,

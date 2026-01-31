@@ -2,8 +2,8 @@ WITH ssr AS (
   SELECT
     s_store_id AS store_id,
     SUM(ss_ext_sales_price) AS sales,
-    SUM(COALESCE(sr_return_amt, 0)) AS returns_amt,
-    SUM(ss_net_profit - COALESCE(sr_net_loss, 0)) AS profit
+    SUM(COALESCE(sr_return_amt, 0.00)) AS returns_amt,
+    SUM(ss_net_profit - COALESCE(sr_net_loss, 0.00)) AS profit
   FROM store_sales
   LEFT JOIN store_returns ON ss_item_sk = sr_item_sk AND ss_ticket_number = sr_ticket_number
   JOIN date_dim ON ss_sold_date_sk = d_date_sk
@@ -11,7 +11,7 @@ WITH ssr AS (
   JOIN item ON ss_item_sk = i_item_sk
   JOIN promotion ON ss_promo_sk = p_promo_sk
   WHERE d_date BETWEEN DATE '2000-08-23' AND DATE_ADD(DATE '2000-08-23', INTERVAL 30 DAY)
-    AND i_current_price > 50
+    AND i_current_price > 50.00
     AND p_channel_tv = 'N'
   GROUP BY s_store_id
 ),
@@ -19,8 +19,8 @@ csr AS (
   SELECT
     cp_catalog_page_id AS catalog_page_id,
     SUM(cs_ext_sales_price) AS sales,
-    SUM(COALESCE(cr_return_amount, 0)) AS returns_amt,
-    SUM(cs_net_profit - COALESCE(cr_net_loss, 0)) AS profit
+    SUM(COALESCE(cr_return_amount, 0.00)) AS returns_amt,
+    SUM(cs_net_profit - COALESCE(cr_net_loss, 0.00)) AS profit
   FROM catalog_sales
   LEFT JOIN catalog_returns ON cs_item_sk = cr_item_sk AND cs_order_number = cr_order_number
   JOIN date_dim ON cs_sold_date_sk = d_date_sk
@@ -28,7 +28,7 @@ csr AS (
   JOIN item ON cs_item_sk = i_item_sk
   JOIN promotion ON cs_promo_sk = p_promo_sk
   WHERE d_date BETWEEN DATE '2000-08-23' AND DATE_ADD(DATE '2000-08-23', INTERVAL 30 DAY)
-    AND i_current_price > 50
+    AND i_current_price > 50.00
     AND p_channel_tv = 'N'
   GROUP BY cp_catalog_page_id
 ),
@@ -36,8 +36,8 @@ wsr AS (
   SELECT
     web_site_id,
     SUM(ws_ext_sales_price) AS sales,
-    SUM(COALESCE(wr_return_amt, 0)) AS returns_amt,
-    SUM(ws_net_profit - COALESCE(wr_net_loss, 0)) AS profit
+    SUM(COALESCE(wr_return_amt, 0.00)) AS returns_amt,
+    SUM(ws_net_profit - COALESCE(wr_net_loss, 0.00)) AS profit
   FROM web_sales
   LEFT JOIN web_returns ON ws_item_sk = wr_item_sk AND ws_order_number = wr_order_number
   JOIN date_dim ON ws_sold_date_sk = d_date_sk
@@ -45,7 +45,7 @@ wsr AS (
   JOIN item ON ws_item_sk = i_item_sk
   JOIN promotion ON ws_promo_sk = p_promo_sk
   WHERE d_date BETWEEN DATE '2000-08-23' AND DATE_ADD(DATE '2000-08-23', INTERVAL 30 DAY)
-    AND i_current_price > 50
+    AND i_current_price > 50.00
     AND p_channel_tv = 'N'
   GROUP BY web_site_id
 )

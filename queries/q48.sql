@@ -9,15 +9,15 @@ WHERE d_year = 2000
     (cd_marital_status = 'M' AND cd_education_status = '4 yr Degree'
      AND ss_sales_price BETWEEN 100.00 AND 150.00
      AND ca_country = 'United States' AND ca_state IN ('KY', 'GA', 'NM')
-     AND ss_net_profit BETWEEN 0 AND 2000)
+     AND ss_net_profit BETWEEN 0.00 AND 2000.00)
     OR
     (cd_marital_status = 'M' AND cd_education_status = '4 yr Degree'
      AND ss_sales_price BETWEEN 50.00 AND 100.00
      AND ca_country = 'United States' AND ca_state IN ('OK', 'FL', 'MN')
-     AND ss_net_profit BETWEEN 150 AND 3000)
+     AND ss_net_profit BETWEEN 150.00 AND 3000.00)
     OR
     (cd_marital_status = 'M' AND cd_education_status = '4 yr Degree'
      AND ss_sales_price BETWEEN 150.00 AND 200.00
      AND ca_country = 'United States' AND ca_state IN ('VA', 'AZ', 'WV')
-     AND ss_net_profit BETWEEN 50 AND 25000)
+     AND ss_net_profit BETWEEN 50.00 AND 25000.00)
   )

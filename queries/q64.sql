@@ -3,7 +3,7 @@ WITH cs_ui AS (
   FROM catalog_sales
   JOIN catalog_returns ON cs_item_sk = cr_item_sk AND cs_order_number = cr_order_number
   GROUP BY cs_item_sk
-  HAVING SUM(cs_ext_list_price) > 2 * SUM(cr_refunded_cash + cr_reversed_charge + cr_store_credit)
+  HAVING SUM(cs_ext_list_price) > 2.00 * SUM(cr_refunded_cash + cr_reversed_charge + cr_store_credit)
 ),
 cross_sales AS (
   SELECT
@@ -14,7 +14,7 @@ cross_sales AS (
     ad2.ca_zip AS c_zip,
     d1.d_year AS syear, d1.d_qoy AS s_qoy, d2.d_year AS byear, d2.d_qoy AS b_qoy,
     c1.c_current_addr_sk AS c1_addr_sk, c2.c_current_addr_sk AS c2_addr_sk,
-    SUM(ss_ext_sales_price) AS store_sales, SUM(ss_net_profit) AS store_cost,
+    SUM(ss1.ss_ext_sales_price) AS store_sales, SUM(ss1.ss_net_profit) AS store_cost,
     SUM(ss2.ss_ext_sales_price) AS store_sales2, SUM(ss2.ss_net_profit) AS store_cost2
   FROM store_sales ss1
   JOIN store_sales ss2 ON ss1.ss_store_sk = ss2.ss_store_sk
@@ -31,8 +31,8 @@ cross_sales AS (
   JOIN cs_ui ON ss1.ss_item_sk = cs_ui.cs_item_sk
   JOIN income_band ib1 ON c1.c_first_sales_date_sk = ib1.ib_lower_bound
   JOIN income_band ib2 ON c2.c_first_sales_date_sk = ib2.ib_lower_bound
-  WHERE i_current_price BETWEEN 64 AND 64 + 10
-    AND i_current_price BETWEEN 64 + 1 AND 64 + 15
+  WHERE i_current_price BETWEEN 64.00 AND 74.00
+    AND i_current_price BETWEEN 65.00 AND 79.00
     AND i_color IN ('purple', 'burlywood', 'indian', 'spring', 'floral', 'medium')
     AND d1.d_year = 1999
   GROUP BY i_product_name, i_item_sk, s_store_name, s_zip,

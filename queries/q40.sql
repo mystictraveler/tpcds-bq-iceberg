@@ -1,8 +1,8 @@
 SELECT
   w_state,
   i_item_id,
-  SUM(CASE WHEN d_date < DATE '2000-03-11' THEN cs_sales_price - COALESCE(cr_refunded_cash, 0) ELSE 0 END) AS sales_before,
-  SUM(CASE WHEN d_date >= DATE '2000-03-11' THEN cs_sales_price - COALESCE(cr_refunded_cash, 0) ELSE 0 END) AS sales_after
+  SUM(CASE WHEN d_date < DATE '2000-03-11' THEN cs_sales_price - COALESCE(cr_refunded_cash, 0.00) ELSE 0.00 END) AS sales_before,
+  SUM(CASE WHEN d_date >= DATE '2000-03-11' THEN cs_sales_price - COALESCE(cr_refunded_cash, 0.00) ELSE 0.00 END) AS sales_after
 FROM catalog_sales
 LEFT JOIN catalog_returns ON cs_order_number = cr_order_number AND cs_item_sk = cr_item_sk
 JOIN warehouse ON cs_warehouse_sk = w_warehouse_sk

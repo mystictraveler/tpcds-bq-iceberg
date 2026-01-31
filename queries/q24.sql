@@ -14,8 +14,9 @@ WITH ssales AS (
   GROUP BY c_last_name, c_first_name, s_store_name, ca_state, s_state,
     i_color, i_current_price, i_manager_id, i_units, i_size
 )
-SELECT c_last_name, c_first_name, s_store_name, netpaid AS paid
+SELECT c_last_name, c_first_name, s_store_name, SUM(netpaid) AS paid
 FROM ssales
 WHERE i_color = 'pale'
-HAVING netpaid > (SELECT 0.05 * AVG(netpaid) FROM ssales)
+GROUP BY c_last_name, c_first_name, s_store_name
+HAVING SUM(netpaid) > (SELECT CAST(0.05 AS NUMERIC) * AVG(netpaid) FROM ssales)
 ORDER BY c_last_name, c_first_name, s_store_name
